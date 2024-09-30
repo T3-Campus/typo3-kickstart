@@ -1,0 +1,33 @@
+page = PAGE
+page {
+    typeNum = 0
+
+    10 = FLUIDTEMPLATE
+    10 {
+        # 1. Solution to combine backend_layout with frontend template
+        templateName = TEXT
+        templateName.stdWrap.cObject = CASE
+        templateName.stdWrap.cObject {
+            key.data = pagelayout
+
+            default = TEXT
+            default.value = OneColumn
+
+            -1 = TEXT
+            -1.value = OneColumn
+        }
+
+
+        templateRootPaths {
+            0 = EXT:custom_package/Resources/Private/Templates/Page/
+        }
+
+        partialRootPaths {
+            0 = EXT:custom_package/Resources/Private/Partials/Page/
+        }
+
+        layoutRootPaths {
+            0 = EXT:custom_package/Resources/Private/Layouts/Page/
+        }
+    }
+}

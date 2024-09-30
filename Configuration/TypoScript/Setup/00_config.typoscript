@@ -1,0 +1,16 @@
+config {
+    compressCSS = 1
+    compressJs = 1
+    concatenateCss = 1
+    concatenateJs = 1
+}
+
+[applicationContext == "Development"]
+    config {
+        compressCSS = 0
+        compressJs = 0
+        concatenateCss = 0
+        concatenateJs = 0
+        no_cache = 1
+    }
+[END]
