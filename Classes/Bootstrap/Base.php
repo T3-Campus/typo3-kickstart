@@ -66,4 +66,15 @@ abstract class Base
     {
         return 'FILE:EXT:' . $this->extensionKey . '/Configuration/Flexforms/' . $filename;
     }
+
+    /**
+     * Return the path for TsConfig files
+     * @param string $filename
+     * @param string $scope (Page or User)
+     * @return string
+     */
+    protected function getTsConfigPath(string $filename, string $scope = 'Page'): string
+    {
+        return 'Configuration/TSconfig/' . $scope . '/StaticFile/' . $filename;
+    }
 }
