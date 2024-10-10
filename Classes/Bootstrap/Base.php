@@ -77,4 +77,14 @@ abstract class Base
     {
         return 'Configuration/TSconfig/' . $scope . '/StaticFile/' . $filename;
     }
+
+    /**
+     * Return path for Icons
+     * @param string $fileName
+     * @return string
+     */
+    protected function getIcon(string $fileName): string
+    {
+        return 'EXT:' . $this->extensionKey . '/Resources/Public/Icons/' . $fileName;
+    }
 }
