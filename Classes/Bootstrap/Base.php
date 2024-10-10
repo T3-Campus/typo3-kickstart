@@ -83,7 +83,7 @@ abstract class Base
      * @param string $fileName
      * @return string
      */
-    protected function getIcon(string $fileName): string
+    protected function getIconPath(string $fileName): string
     {
         return 'EXT:' . $this->extensionKey . '/Resources/Public/Icons/' . $fileName;
     }
