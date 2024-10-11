@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace Wacon\CustomPackage\Bootstrap\Traits;
+namespace Slavlee\CustomPackage\Bootstrap\Traits;
 
 trait ExtensionTrait
 {

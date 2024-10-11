@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:custom_package/Resources/Private/Language/locallang.xlf" date="2024-01-16T09:21:42Z" product-name="custom_package">
+		<header/>
+		<body>
+			<trans-unit id="exampleKey" resname="exampleKey">
+				<source>Lorem Ipsum</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
