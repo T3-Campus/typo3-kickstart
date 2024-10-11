@@ -24,6 +24,28 @@ trait TcaTrait
     public const COMMON_TYPES_MEDIA = 'common-media-types';
 
     /**
+     * Get standard crdate TCA def
+     * @param bool $exclude
+     * @param string $label
+     * @param mixed $size
+     * @return array
+     */
+    protected function getCrdateTCADef(bool $exclude, string $label, $size = 30): array
+    {
+        return [
+            'exclude' => $exclude,
+            'label' => $label,
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'eval' => 'datetime',
+                'size' => $size,
+                'readOnly' => 1
+            ],
+        ];
+    }
+
+    /**
      * Return the TYPO3 Standard TCA definition for hidden field
      * @return array
      */

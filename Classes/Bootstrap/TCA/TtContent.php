@@ -17,31 +17,36 @@ declare(strict_types=1);
 
 namespace Slavlee\CustomPackage\Bootstrap\TCA;
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use Slavlee\CustomPackage\Bootstrap\Base;
-use Slavlee\CustomPackage\Bootstrap\Traits\ExtensionTrait;
 
-class SysTemplate extends Base
+class TtContent extends Base
 {
-    use ExtensionTrait;
-
     /**
      * Does the main class purpose
      */
     public function invoke()
     {
-        $this->addStaticFiles();
+        $this->registerPlugins();
     }
 
     /**
-     * ExtensionManagementUtility::addStaticFile
+     * ExtensionUtility::registerPlugin
      */
-    private function addStaticFiles()
+    private function registerPlugins()
     {
-        ExtensionManagementUtility::addStaticFile(
-            $this->extensionKey,
-            'Configuration/TypoScript',
-            'Custom Package - Base'
+        $pluginSignature = ExtensionUtility::registerPlugin(
+            $this->getExtensionKeyAsNamespace(),
+            'Upload',
+            $this->getLLL('locallang_plugins.xlf:upload.title'),
+        );
+
+        $this->registerFlexform($pluginSignature, 'Upload.xml');        
+
+        ExtensionUtility::registerPlugin(
+            $this->getExtensionKeyAsNamespace(),
+            'Download',
+            $this->getLLL('locallang_plugins.xlf:download.title'),
         );
     }
 }

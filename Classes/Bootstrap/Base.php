@@ -15,10 +15,11 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace Wacon\CustomPackage\Bootstrap;
+namespace Slavlee\CustomPackage\Bootstrap;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use Wacon\CustomPackage\Bootstrap\Traits\ExtensionTrait;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use Slavlee\CustomPackage\Bootstrap\Traits\ExtensionTrait;
 
 abstract class Base
 {
@@ -86,5 +87,21 @@ abstract class Base
     protected function getIconPath(string $fileName): string
     {
         return 'EXT:' . $this->extensionKey . '/Resources/Public/Icons/' . $fileName;
+    }
+
+    /**
+     * Register a flexform
+     * @param string $pluginSignature
+     * @param string $fileName
+     * @return void
+     */
+    protected function registerFlexform(string $pluginSignature, string $fileName)
+    {
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+
+        ExtensionManagementUtility::addPiFlexFormValue(
+            $pluginSignature,
+            $this->getFlexformPath($fileName)
+        );
     }
 }

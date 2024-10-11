@@ -19,6 +19,7 @@ namespace Slavlee\CustomPackage\Bootstrap;
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use Slavlee\CustomPackage\Bootstrap\Traits\ExtensionTrait;
+use Slavlee\CustomPackage\Controller\ExampleController;
 
 class ExtLocalconf extends Base
 {
@@ -30,6 +31,7 @@ class ExtLocalconf extends Base
     public function invoke()
     {
         $this->registerRTEPresets();
+        $this->configurePlugins();
     }
 
     /**
@@ -39,5 +41,22 @@ class ExtLocalconf extends Base
     {
         $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets'][$this->extensionKey]
             = 'EXT:' . $this->extensionKey . '/Configuration/RTE/Default.yaml';
+    }
+
+    /**
+     * ExtensionUtility::configurePlugin
+     */
+    private function configurePlugins()
+    {
+        ExtensionUtility::configurePlugin(
+            $this->getExtensionKeyAsNamespace(),
+            'Example',
+            [
+                ExampleController::class => 'example',
+            ],
+            [
+                ExampleController::class => 'example',
+            ]
+        );
     }
 }

@@ -1,0 +1,8 @@
+plugin.tx_custompackage_example {
+    settings {
+        upload {
+            storage = 1
+            folder = /
+        }
+    }
+}
