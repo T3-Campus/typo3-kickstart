@@ -166,4 +166,26 @@ trait TcaTrait
             ],
         ];
     }
+
+    /**
+     * Return simple checkbox TCA def
+     * @param bool $exclude
+     * @param string $label
+     * @return array
+     */
+    protected function getCheckTCADef(bool $exclude, string $label): array
+    {
+        return [
+            'exclude' => $exclude,
+            'label' => $label,
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    [
+                        'label' => '',
+                    ],
+                ],
+            ],
+        ];
+    }
 }

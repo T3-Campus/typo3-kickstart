@@ -1,3 +1,6 @@
+## Version 0.0.8
+- [FEATURE] TcaTrait: Add def for simple checkbox field
+
 ## Version 0.0.7
 - [FEATURE] Add example on how to configure plugin
 - [FEATURE] Add example ActionController, Domain Model and Repository
