@@ -1,3 +1,7 @@
+## Version 0.0.9
+- [FEATURE] Add Icons.php
+- [FEATURE] Example how to include Social Media Favicons
+
 ## Version 0.0.8
 - [FEATURE] TcaTrait: Add def for simple checkbox field
 

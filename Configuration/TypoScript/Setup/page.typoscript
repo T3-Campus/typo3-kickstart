@@ -31,3 +31,31 @@ page {
         }
     }
 }
+
+# Multiple Favicons
+page.headerData {
+    1 = IMG_RESOURCE
+    1 {
+      file = EXT:custom_package/Resources/Public/Icons/Favicon/apple-touch-icon.png
+      stdWrap.dataWrap = <link rel="apple-touch-icon" sizes="180x180" href="|"/>
+    }
+
+    2 = IMG_RESOURCE
+    2 {
+      file = EXT:custom_package/Resources/Public/Icons/Favicon/favicon-32x32.png
+      stdWrap.dataWrap = <link rel="apple-touch-icon" sizes="32x32" href="|"/>
+    }
+}
+
+# PAGE object ajax example
+myAjax = PAGE
+myAjax {
+   typeNum = 1617455214
+   config {
+      disableAllHeaderCode = 1
+      admPanel = 0
+      debug = 0
+      additionalHeaders.10.header = Content-type:application/json
+   }
+   10 =< tt_content.list.20.tx_myextension_myjsonplugin
+}
