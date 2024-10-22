@@ -1,3 +1,7 @@
+## Version 0.0.10
+- [FEATURE] Example on how to throw 404 error in action function
+- [CHANGE] Moved several functions related to extensionKey from Base to ExtensionTrait
+
 ## Version 0.0.9
 - [FEATURE] Add Icons.php
 - [FEATURE] Example how to include Social Media Favicons

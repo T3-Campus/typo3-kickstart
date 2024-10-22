@@ -18,7 +18,10 @@ declare(strict_types=1);
 namespace Slavlee\CustomPackage\Controller;
 
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\ImmediateResponseException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Frontend\Controller\ErrorController;
 
 final class DownloadController extends ActionController
 {
@@ -28,6 +31,15 @@ final class DownloadController extends ActionController
      */
     public function exampleAction()
     {
+        $someCondition = false;
+        
+        // Example on how to throw 404 error in action function
+        if ($someCondition)
+        $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
+            $this->request, 'Your error message'
+        );
+        throw new ImmediateResponseException($response, time());
+
         return $this->htmlResponse();
     }
 }
