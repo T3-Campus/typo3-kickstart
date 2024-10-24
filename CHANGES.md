@@ -1,3 +1,6 @@
+## Version 1.0.0
+- [FEATURE] ExtensionTrait: Add registerRTEPreset and getConfigPath
+
 ## Version 0.0.10
 - [FEATURE] Example on how to throw 404 error in action function
 - [CHANGE] Moved several functions related to extensionKey from Base to ExtensionTrait

@@ -108,4 +108,31 @@ trait ExtensionTrait
     {
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = $value;
     }
+
+    /**
+     * Retunr the EXT path to Configuration inside the current extension
+     * @return string
+     */
+    protected function getConfigPath(): string
+    {
+        return 'EXT:' . $this->extensionKey . '/Configuration/';
+    }
+
+    /**
+     * Register a RTE preset file
+     * @param string $key
+     * @param string $yamlFilename
+     */
+    protected function registerRTEPreset(string $key, string $yamlFilename)
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets'][$key] = $this->getConfigPath() . 'RTE/' . $yamlFilename;
+    }
+
+    /**
+     * Return extension key without _
+     */
+    protected function getExtensionKeyForRedirect(): string
+    {
+        return str_replace('_', '', $this->extensionKey);
+    }
 }

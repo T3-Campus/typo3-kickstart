@@ -59,9 +59,10 @@ trait TcaTrait
      * @param bool $exclude
      * @param string $label
      * @param mixed $size
+     * @param bool $required
      * @return array
      */
-    protected function getInputTCADef(bool $exclude, string $label, $size = 30): array
+    protected function getInputTCADef(bool $exclude, string $label, $size = 30, bool $required = true): array
     {
         return [
             'exclude' => $exclude,
@@ -69,7 +70,8 @@ trait TcaTrait
             'config' => [
                 'type' => 'input',
                 'size' => $size,
-                'eval' => 'trim'
+                'eval' => 'trim',
+                'required' => $required
             ],
         ];
     }
@@ -78,9 +80,10 @@ trait TcaTrait
      * Get default RTE TCA def
      * @param bool $exclude
      * @param string $label
+     * @param bool $required
      * @return array
      */
-    protected function getRTETCADef(bool $exclude, string $label): array
+    protected function getRTETCADef(bool $exclude, string $label, bool $required = true): array
     {
         return [
             'exclude' => $exclude,
@@ -88,6 +91,7 @@ trait TcaTrait
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
+                'required' => $required,
             ],
         ];
     }
@@ -171,9 +175,10 @@ trait TcaTrait
      * Return simple checkbox TCA def
      * @param bool $exclude
      * @param string $label
+     * @param bool $required
      * @return array
      */
-    protected function getCheckTCADef(bool $exclude, string $label): array
+    protected function getCheckTCADef(bool $exclude, string $label, bool $required): array
     {
         return [
             'exclude' => $exclude,
@@ -185,6 +190,7 @@ trait TcaTrait
                         'label' => '',
                     ],
                 ],
+                'required' => $required
             ],
         ];
     }
