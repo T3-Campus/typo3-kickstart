@@ -1,5 +1,6 @@
 ## Version 1.0.0
 - [FEATURE] ExtensionTrait: Add registerRTEPreset and getConfigPath
+- [FEATURE] Add .editorconfig with TYPO3 config
 
 ## Version 0.0.10
 - [FEATURE] Example on how to throw 404 error in action function
