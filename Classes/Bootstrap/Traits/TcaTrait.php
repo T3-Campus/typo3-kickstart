@@ -46,6 +46,21 @@ trait TcaTrait
     }
 
     /**
+     * Get standard date TCA def
+     * @param bool $exclude
+     * @param string $label
+     * @param mixed $size
+     * @return array
+     */
+    protected function getDateTCADef(bool $exclude, string $label, $size = 30): array
+    {
+        $tca = $this->getCrdateTCADef($exclude, $label, $size);
+        unset($tca['config']['readOnly']);
+
+        return $tca;
+    }
+
+    /**
      * Return the TYPO3 Standard TCA definition for hidden field
      * @return array
      */

@@ -1,3 +1,7 @@
+## Version 1.1.0
+- [FEATURE] TcaTrait: Add getDateTCADef
+- [FEATURE] Add Example Command
+
 ## Version 1.0.0
 - [FEATURE] ExtensionTrait: Add registerRTEPreset and getConfigPath
 - [FEATURE] Add .editorconfig with TYPO3 config
