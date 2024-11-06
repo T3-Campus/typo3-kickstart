@@ -1,3 +1,7 @@
+## Version 1.2.0
+- [FEATURE] Add Extbase/RepositoryUtility
+- [FEATURE] Add ExtensionTrait: registerFlexformToCType
+
 ## Version 1.1.0
 - [FEATURE] TcaTrait: Add getDateTCADef
 - [FEATURE] Add Example Command

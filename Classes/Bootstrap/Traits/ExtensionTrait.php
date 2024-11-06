@@ -100,6 +100,21 @@ trait ExtensionTrait
     }
 
     /**
+     * Register a flexform to a CType
+     * @param string $cType
+     * @param string $fileName
+     * @return void
+     */
+    protected function registerFlexformToCType(string $cType, string $fileName)
+    {
+        ExtensionManagementUtility::addPiFlexFormValue(
+            '*',
+            $this->getFlexformPath($fileName),
+            $cType
+        );
+    }
+
+    /**
      * Set $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature]
      * @param string $value
      * @return void
