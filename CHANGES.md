@@ -1,3 +1,6 @@
+## Version 1.3.0
+- [FEATURE] Add examples for HMENU
+
 ## Version 1.2.0
 - [FEATURE] Add Extbase/RepositoryUtility
 - [FEATURE] Add ExtensionTrait: registerFlexformToCType

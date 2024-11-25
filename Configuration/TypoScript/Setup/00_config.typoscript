@@ -12,5 +12,6 @@ config {
         concatenateCss = 0
         concatenateJs = 0
         no_cache = 1
+        contentObjectExceptionHandler = 0
     }
 [END]
