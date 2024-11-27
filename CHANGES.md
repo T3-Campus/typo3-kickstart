@@ -1,3 +1,10 @@
+## Version 1.5.0
+- [FEATURE] Add $additionalConfig argument to extend the TCA def for the default tca field functions
+- [FEATURE] Add getTextareaCADef to TcaTrait
+
+## Version 1.4.0
+- [FEATURE] Add usefull TCAdefaults.tsconfig settings
+
 ## Version 1.3.0
 - [FEATURE] Add examples for HMENU
 

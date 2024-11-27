@@ -24,15 +24,22 @@ trait TcaTrait
     public const COMMON_TYPES_MEDIA = 'common-media-types';
 
     /**
+     * Name of the current db table
+     * @var string
+     */
+    protected $dbTable = '';
+
+    /**
      * Get standard crdate TCA def
      * @param bool $exclude
      * @param string $label
      * @param mixed $size
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getCrdateTCADef(bool $exclude, string $label, $size = 30): array
+    protected function getCrdateTCADef(bool $exclude, string $label, $size = 30, array $additionalConfig = []): array
     {
-        return [
+        $default = [
             'exclude' => $exclude,
             'label' => $label,
             'config' => [
@@ -43,6 +50,12 @@ trait TcaTrait
                 'readOnly' => 1
             ],
         ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
     }
 
     /**
@@ -50,11 +63,12 @@ trait TcaTrait
      * @param bool $exclude
      * @param string $label
      * @param mixed $size
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getDateTCADef(bool $exclude, string $label, $size = 30): array
+    protected function getDateTCADef(bool $exclude, string $label, $size = 30, array $additionalConfig = []): array
     {
-        $tca = $this->getCrdateTCADef($exclude, $label, $size);
+        $tca = $this->getCrdateTCADef($exclude, $label, $size, $additionalConfig);
         unset($tca['config']['readOnly']);
 
         return $tca;
@@ -75,11 +89,12 @@ trait TcaTrait
      * @param string $label
      * @param mixed $size
      * @param bool $required
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getInputTCADef(bool $exclude, string $label, $size = 30, bool $required = true): array
+    protected function getInputTCADef(bool $exclude, string $label, $size = 30, bool $required = true, array $additionalConfig = []): array
     {
-        return [
+        $default =  [
             'exclude' => $exclude,
             'label' => $label,
             'config' => [
@@ -89,6 +104,12 @@ trait TcaTrait
                 'required' => $required
             ],
         ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
     }
 
     /**
@@ -96,11 +117,28 @@ trait TcaTrait
      * @param bool $exclude
      * @param string $label
      * @param bool $required
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getRTETCADef(bool $exclude, string $label, bool $required = true): array
+    protected function getTextareaCADef(bool $exclude, string $label, bool $required = true, array $additionalConfig = []): array
     {
-        return [
+        $default = $this->getRTETCADef($exclude, $label, $required, $additionalConfig);
+        unset($default['config']['enableRichtext']);
+
+        return $default;
+    }
+
+    /**
+     * Get default RTE TCA def
+     * @param bool $exclude
+     * @param string $label
+     * @param bool $required
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getRTETCADef(bool $exclude, string $label, bool $required = true, array $additionalConfig = []): array
+    {
+        $default = [
             'exclude' => $exclude,
             'label' => $label,
             'config' => [
@@ -109,6 +147,12 @@ trait TcaTrait
                 'required' => $required,
             ],
         ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
     }
 
     /**
@@ -117,11 +161,12 @@ trait TcaTrait
      * @param string $label
      * @param int $minItems
      * @param int $maxItems
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getMediaTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0): array
+    protected function getMediaTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, array $additionalConfig = []): array
     {
-        $tca = $this->getFileTCADef($exclude, $label, $minItems, $maxItems, self::COMMON_TYPES_MEDIA);
+        $tca = $this->getFileTCADef($exclude, $label, $minItems, $maxItems, self::COMMON_TYPES_MEDIA, $additionalConfig);
 
         return $tca;
     }
@@ -132,11 +177,12 @@ trait TcaTrait
      * @param string $label
      * @param int $minItems
      * @param int $maxItems
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getImageTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0): array
+    protected function getImageTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, array $additionalConfig = []): array
     {
-        $tca = $this->getFileTCADef($exclude, $label, $minItems, $maxItems, self::COMMON_TYPES_IMAGE);
+        $tca = $this->getFileTCADef($exclude, $label, $minItems, $maxItems, self::COMMON_TYPES_IMAGE, $additionalConfig);
 
         return $tca;
     }
@@ -147,11 +193,12 @@ trait TcaTrait
      * @param string $label
      * @param int $minItems
      * @param int $maxItems
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getFileTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, string $allowed = self::COMMON_TYPES_FILE): array
+    protected function getFileTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, string $allowed = self::COMMON_TYPES_FILE, array $additionalConfig = []): array
     {
-        return [
+        $default = [
             'exclude' => $exclude,
             'label' => $label,
             'config' => [
@@ -161,6 +208,12 @@ trait TcaTrait
                 'allowed' => $allowed,
             ],
         ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
     }
 
     /**
@@ -169,11 +222,12 @@ trait TcaTrait
      * @param string $label
      * @param int $minItems
      * @param int $maxItems
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getFeUserTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0): array
+    protected function getFeUserTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, array $additionalConfig = []): array
     {
-        return [
+        $default = [
             'exclude' => $exclude,
             'label' => $label,
             'config' => [
@@ -184,6 +238,12 @@ trait TcaTrait
                 'maxitems' => $maxItems,
             ],
         ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
     }
 
     /**
@@ -191,11 +251,12 @@ trait TcaTrait
      * @param bool $exclude
      * @param string $label
      * @param bool $required
+     * @param array $additionalConfig
      * @return array
      */
-    protected function getCheckTCADef(bool $exclude, string $label, bool $required): array
+    protected function getCheckTCADef(bool $exclude, string $label, bool $required, array $additionalConfig = []): array
     {
-        return [
+        $default = [
             'exclude' => $exclude,
             'label' => $label,
             'config' => [
@@ -208,5 +269,11 @@ trait TcaTrait
                 'required' => $required
             ],
         ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
     }
 }
