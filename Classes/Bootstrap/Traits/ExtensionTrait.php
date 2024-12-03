@@ -53,6 +53,16 @@ trait ExtensionTrait
     }
 
     /**
+     * Return LLL path for core labels
+     * @param string $key
+     * @return string
+     */
+    protected function getLLLForCoreLabels(string $key): string
+    {
+        return 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:' . $key;
+    }
+
+    /**
      * Return the path to FlexForm file
      * @param string $filename
      * @return string

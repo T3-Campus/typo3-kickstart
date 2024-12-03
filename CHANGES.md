@@ -1,3 +1,9 @@
+## Version 1.6.0
+- [FEATURE] Add getJsonTCADef to TcaTrait
+- [FEATURE] ExtensionTrait add getLLLForCoreLabels
+- [FEATURE] Add getNumberTCADef, getSlugTCADef
+- [CHANGE] Update datetime field TCA definition
+
 ## Version 1.5.0
 - [FEATURE] Add $additionalConfig argument to extend the TCA def for the default tca field functions
 - [FEATURE] Add getTextareaCADef to TcaTrait

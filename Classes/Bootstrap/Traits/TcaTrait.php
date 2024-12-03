@@ -43,9 +43,7 @@ trait TcaTrait
             'exclude' => $exclude,
             'label' => $label,
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime',
+                'type' => 'datetime',
                 'size' => $size,
                 'readOnly' => 1
             ],
@@ -103,6 +101,57 @@ trait TcaTrait
                 'eval' => 'trim',
                 'required' => $required
             ],
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Return base email TCA def
+     * @param bool $exclude
+     * @param string $label
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getEmailTCADef(bool $exclude, string $label, array $additionalConfig = []): array
+    {
+        $default = [
+            'exclude' => $exclude,
+            'label' => $label,
+            'config' => [
+                'type' => 'email',
+            ]
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Return default TCA for number field
+     * @param bool $exclude
+     * @param string $label
+     * @param mixed $size
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getNumberTCADef(bool $exclude, string $label, $size = 30, array $additionalConfig = []): array
+    {
+        $default = [
+            'exclude' => $exclude,
+            'label' => $label,
+            'config' => [
+                'type' => 'number',
+                'size' => $size,
+                'format' => 'decimal'
+            ]
         ];
 
         if (!empty($additionalConfig)) {
@@ -267,6 +316,108 @@ trait TcaTrait
                     ],
                 ],
                 'required' => $required
+            ],
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Create basic TCA def for json field
+     * @param bool $exclude
+     * @param string $label
+     * @param bool $required
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getJsonTCADef(bool $exclude, string $label, bool $required, array $additionalConfig = []): array
+    {
+        $default =  [
+            'exclude' => $exclude,
+            'label' => $label,
+            'config' => [
+                'type' => 'json',
+                'eval' => 'trim',
+                'required' => $required
+            ],
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Return TCA def for sys_language_uid field
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getSysLanguageUidTCADef(array $additionalConfig = []): array
+    {
+        $default = [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+            'config' => ['type' => 'language']
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Get l10n_diffsource TCA def
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getDiffSourceTCADef(array $additionalConfig = []): array
+    {
+        $default = [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Return basic slug field TCA def
+     * @param bool $exclude
+     * @param string $label
+     * @param array $fields
+     * @param string $fieldSeperator
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getSlugTCADef(bool $exclude, string $label, array $fields, string $fieldSeperator = '/', array $additionalConfig = []): array
+    {
+        $default = [
+            'exclude' => $exclude,
+            'label' => $label,
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => $fields,
+                    'fieldSeparator' => $fieldSeperator,
+                    'prefixParentPageSlug' => true,
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => '',
             ],
         ];
 
