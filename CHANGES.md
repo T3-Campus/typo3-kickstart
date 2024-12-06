@@ -1,3 +1,7 @@
+## Version 1.7.0
+- [FEATURE] Add ContainerRegistry
+- [FEATURE] Add example of HMENU language
+
 ## Version 1.6.0
 - [FEATURE] Add getJsonTCADef to TcaTrait
 - [FEATURE] ExtensionTrait add getLLLForCoreLabels

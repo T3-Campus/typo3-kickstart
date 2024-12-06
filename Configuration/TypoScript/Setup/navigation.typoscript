@@ -96,3 +96,40 @@ lib.navigation.sub {
     3 < .2
     4 < .3
 }
+
+lib.navigation.languageMenu = HMENU
+lib.navigation.languageMenu {
+  special = language
+  special.value = auto
+  wrap = <div class="dropdown dropup text-center text-md-end mt-3 mt-md-0"><a class="dropdown-toggle btn btn-sm btn-light mb-0" href="#" role="button" id="languageSwitcher" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe me-2"></i>{LLL : EXT:custom_package/Resources/Private/Language/locallang.xlf:languageswitch.label}</a>|</div>
+  wrap.insertData = 1
+
+  1 = TMENU
+  1 {
+    wrap = <ul class="dropdown-menu min-w-auto" aria-labelledby="languageSwitcher">|</ul>
+    NO = 1
+    NO {
+      linkWrap = <li>|</li>
+      doNotLinkIt = 1
+      stdWrap.override = en || de
+      stdWrap.typolink {
+        parameter.data = page:uid
+        additionalParams = &L=0 || &L=1
+        addQueryString = 1
+        addQueryString.exclude = L,id
+        ATagParams = class="dropdown-item me-4"
+      }
+    }
+
+    ACT < .NO
+    ACT {
+      linkWrap = <li class="active">|</li>
+    }
+
+    USERDEF1 < .NO
+    USERDEF1 {
+      linkWrap = <li class="disabled"><span class="dropdown-item me-4">|</span></li>
+      stdWrap.typolink >
+    }
+  }
+}
