@@ -40,7 +40,7 @@ trait TcaTrait
     protected function getCrdateTCADef(bool $exclude, string $label, $size = 30, array $additionalConfig = []): array
     {
         $default = [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'datetime',
@@ -93,13 +93,13 @@ trait TcaTrait
     protected function getInputTCADef(bool $exclude, string $label, $size = 30, bool $required = true, array $additionalConfig = []): array
     {
         $default =  [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'input',
                 'size' => $size,
                 'eval' => 'trim',
-                'required' => $required
+                'required' => $required ? 1 : 0
             ],
         ];
 
@@ -120,7 +120,7 @@ trait TcaTrait
     protected function getEmailTCADef(bool $exclude, string $label, array $additionalConfig = []): array
     {
         $default = [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'email',
@@ -145,7 +145,7 @@ trait TcaTrait
     protected function getNumberTCADef(bool $exclude, string $label, $size = 30, array $additionalConfig = []): array
     {
         $default = [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'number',
@@ -188,12 +188,12 @@ trait TcaTrait
     protected function getRTETCADef(bool $exclude, string $label, bool $required = true, array $additionalConfig = []): array
     {
         $default = [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
-                'required' => $required,
+                'required' => $required ? 1 : 0,
             ],
         ];
 
@@ -248,7 +248,7 @@ trait TcaTrait
     protected function getFileTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, string $allowed = self::COMMON_TYPES_FILE, array $additionalConfig = []): array
     {
         $default = [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'file',
@@ -277,7 +277,7 @@ trait TcaTrait
     protected function getFeUserTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, array $additionalConfig = []): array
     {
         $default = [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'group',
@@ -306,7 +306,7 @@ trait TcaTrait
     protected function getCheckTCADef(bool $exclude, string $label, bool $required, array $additionalConfig = []): array
     {
         $default = [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'check',
@@ -315,7 +315,7 @@ trait TcaTrait
                         'label' => '',
                     ],
                 ],
-                'required' => $required
+                'required' => $required ? 1 : 0
             ],
         ];
 
@@ -337,12 +337,12 @@ trait TcaTrait
     protected function getJsonTCADef(bool $exclude, string $label, bool $required, array $additionalConfig = []): array
     {
         $default =  [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'json',
                 'eval' => 'trim',
-                'required' => $required
+                'required' => $required ? 1 : 0
             ],
         ];
 
@@ -405,7 +405,7 @@ trait TcaTrait
     protected function getSlugTCADef(bool $exclude, string $label, array $fields, string $fieldSeperator = '/', array $additionalConfig = []): array
     {
         $default = [
-            'exclude' => $exclude,
+            'exclude' => $exclude ? 1 : 0,
             'label' => $label,
             'config' => [
                 'type' => 'slug',

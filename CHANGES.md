@@ -1,3 +1,6 @@
+## Version 1.7.1
+- [BUGFIX] Correctly set values for exclude and required in TCA
+
 ## Version 1.7.0
 - [FEATURE] Add ContainerRegistry
 - [FEATURE] Add example of HMENU language
