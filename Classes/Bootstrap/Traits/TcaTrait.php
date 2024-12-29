@@ -427,4 +427,31 @@ trait TcaTrait
 
         return $default;
     }
+
+    /**
+     * Return base TCA def for select
+     * @param string $label
+     * @param string $renderType
+     * @param bool $exclude
+     * @param bool $required
+     * @param array $additionalConfig
+     * @return array
+     */
+    public function getSelectTCADef(string $label, string $renderType = 'selectSingle', bool $exclude = false, bool $required = true, array $additionalConfig = []): array
+    {
+        $default = [
+            'exclude' => $exclude ? 1 : 0,
+            'label' => $label,
+            'config' => [
+                'type' => 'select',
+                'renderType' => $renderType,
+            ],
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
 }

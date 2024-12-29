@@ -1,3 +1,7 @@
+## Version 1.8,9
+- [FEATURE] Add getSelectTCADef
+- [BUGFIX] Add Namespace for AsCommand
+
 ## Version 1.7.1
 - [BUGFIX] Correctly set values for exclude and required in TCA
 
