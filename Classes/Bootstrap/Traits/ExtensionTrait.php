@@ -69,7 +69,7 @@ trait ExtensionTrait
      */
     protected function getFlexformPath(string $filename): string
     {
-        return 'FILE:EXT:' . $this->extensionKey . '/Configuration/Flexforms/' . $filename;
+        return 'FILE:EXT:' . $this->extensionKey . '/Configuration/FlexForm/' . $filename;
     }
 
     /**

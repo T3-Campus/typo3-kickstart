@@ -1,4 +1,8 @@
-## Version 1.8,9
+## Version 1.8.0
+- [FEATURE] Add Example QueryBuilderPagination
+- [CHANGE] Rename folder Flexforms to FlexForm
+
+## Version 1.7.2
 - [FEATURE] Add getSelectTCADef
 - [BUGFIX] Add Namespace for AsCommand
 
