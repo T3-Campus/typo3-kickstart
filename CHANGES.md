@@ -1,3 +1,7 @@
+## Version 1.9.0
+- [FEATURE] Example how to load and store data from session
+- [FEATURE] Add recommended Powermail Settings
+
 ## Version 1.8.0
 - [FEATURE] Add Example QueryBuilderPagination
 - [CHANGE] Rename folder Flexforms to FlexForm

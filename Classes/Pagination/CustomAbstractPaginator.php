@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
- namespace Slavlee\CustomPackage\Pagination;
+namespace Slavlee\CustomPackage\Pagination;
 
 use TYPO3\CMS\Core\Pagination\AbstractPaginator;
 
@@ -54,7 +54,7 @@ abstract class CustomAbstractPaginator extends AbstractPaginator
          * well. As that looks strange in the frontend, the number of pages is forced to be at least
          * one.
          */
-        $this->numberOfPages = max(1, (int)ceil($totalAmountOfItems / $this->itemsPerPage));
+        $this->numberOfPages = max(1, (int) ceil($totalAmountOfItems / $this->itemsPerPage));
 
         /*
          * To prevent empty results in case the given current page number exceeds the maximum number
@@ -73,12 +73,12 @@ abstract class CustomAbstractPaginator extends AbstractPaginator
 
         $isUpdated = false;
         if ($this->currentPageNumber === $this->numberOfPages && $this->initialLimit > 0) {
-            $difference = $this->initialLimit - ((int)($this->itemsPerPage * ($this->currentPageNumber - 1)));
+            $difference = $this->initialLimit - ((int) ($this->itemsPerPage * ($this->currentPageNumber - 1)));
             if ($difference > 0) {
                 $this->updatePaginatedItems($difference, $offset);
                 $isUpdated = true;
                 $totalAmountOfItems = $this->getTotalAmountOfItems();
-                $this->numberOfPages = max(1, (int)ceil($totalAmountOfItems / $this->itemsPerPage));
+                $this->numberOfPages = max(1, (int) ceil($totalAmountOfItems / $this->itemsPerPage));
             }
         }
 

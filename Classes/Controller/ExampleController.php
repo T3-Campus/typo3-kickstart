@@ -32,7 +32,7 @@ final class DownloadController extends ActionController
     public function exampleAction()
     {
         $someCondition = false;
-        
+
         // Example on how to throw 404 error in action function
         if ($someCondition)
         $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
@@ -41,5 +41,47 @@ final class DownloadController extends ActionController
         throw new ImmediateResponseException($response, time());
 
         return $this->htmlResponse();
+    }
+
+    /**
+     * Example how to store data in session
+     * @param mixed $data
+     */
+    protected function storeSessionData(string $id, $data): void
+    {
+        $frontendUser = $this->request->getAttribute('frontend.user');
+        $frontendUser->setKey('ses', $id, $data);
+        $frontendUser->storeSessionData();
+    }
+
+    /**
+     * Get data from session
+     * @param string $id
+     * @return mixed
+     */
+    protected function getSessionData(string $id)
+    {
+        return $this->request->getAttribute('frontend.user')->getKey('ses', $id);
+    }
+
+    /**
+     * Checks if session data is present
+     * @param string $id
+     * @return bool
+     */
+    protected function hasSessionData(string $id): bool
+    {
+        return $this->request->getAttribute('frontend.user')->getKey('ses', $id) ? true : false;
+    }
+
+    /**
+     * Remove data in session
+     * @param string $id
+     */
+    protected function removeSessionData(string $id): void
+    {
+        $frontendUser = $this->request->getAttribute('frontend.user');
+        $frontendUser->setKey('ses', $id, null);
+        $frontendUser->storeSessionData();
     }
 }

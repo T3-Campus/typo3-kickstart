@@ -62,5 +62,23 @@ class RepositoryUtility
         $querySettings->setStoragePageIds($pids);
         $repository->setDefaultQuerySettings($querySettings);
     }
+
+    /**
+     * Return constraint to use it for contains
+     * @param \TYPO3\CMS\Extbase\Persistence\Generic\Query $query
+     * @param array $categories
+     * @param string $propertyName
+     * @return array
+     */
+    public static function getSystemCategoryContainsConstraint(Query &$query, array $categories, string $propertyName): array
+    {
+        $constraints = [];
+
+        foreach($categories as $category) {
+            $constraints[] = $query->contains($propertyName, $category);
+        }
+
+        return $constraints;
+    }
 }
 

@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 namespace Slavlee\CustomPackage\Bootstrap\Traits;
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
@@ -159,5 +160,21 @@ trait ExtensionTrait
     protected function getExtensionKeyForRedirect(): string
     {
         return str_replace('_', '', $this->extensionKey);
+    }
+
+    /**
+     * Utilize \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ExtensionConfiguration::class)
+     * @param string $subKey
+     * @return array
+     */
+    protected function getGlobalExtensionSettings(string $subKey = ''): array
+    {
+        if (!empty($subKey)) {
+            return GeneralUtility::makeInstance(ExtensionConfiguration::class)
+                ->get($this->extensionKey, $subKey);
+        }
+
+        return GeneralUtility::makeInstance(ExtensionConfiguration::class)
+                ->get($this->extensionKey);
     }
 }

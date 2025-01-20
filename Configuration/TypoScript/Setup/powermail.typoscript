@@ -1,0 +1,14 @@
+# Recommended sender settings to avoid spam
+plugin.tx_powermail.settings.receiver.overwrite.senderName = LEA Hessen Energieberatung für Unternehmen
+plugin.tx_powermail.settings.receiver.overwrite.senderEmail = noreply-energieeffizienz@wacon.de
+plugin.tx_powermail.settings.sender.overwrite.senderName = LEA Hessen Energieberatung für Unternehmen
+plugin.tx_powermail.settings.sender.overwrite.senderEmail = noreply-energieeffizienz@wacon.de
+
+# TypoScript condition to test in PROD env
+[request && request.getNormalizedParams().getRemoteAddress() == '176.199.252.43']
+plugin.tx_powermail.settings.receiver.overwrite.email = kevin.lee@wacon.de
+[END]
+
+[request && request.getNormalizedParams().getRemoteAddress() == '2a02:908:160:a8a0:1d97:564d:c1d4:ef0d']
+plugin.tx_powermail.settings.receiver.overwrite.email = kevin.lee@wacon.de
+[END]
