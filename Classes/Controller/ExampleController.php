@@ -20,9 +20,9 @@ namespace Slavlee\CustomPackage\Controller;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\Controller\ErrorController;
-
 final class DownloadController extends ActionController
 {
     /**
@@ -41,6 +41,23 @@ final class DownloadController extends ActionController
         throw new ImmediateResponseException($response, time());
 
         return $this->htmlResponse();
+    }
+
+    public function downloadAction(): ResponseInterface
+    {
+        $data = [
+            ['name' => 'John', 'age' => 25],
+            ['name' => 'Jane', 'age' => 30],
+        ];
+        $resource = $this->csvUtility->write($data);
+        $today = new \DateTime();
+        $response = $this->responseFactory->createResponse()
+            ->withHeader('Cache-Control', 'no-cache, no-store')
+            ->withHeader('Content-Type', 'text/csv; charset=utf-8')
+            ->withHeader('Content-Disposition', 'attachment; filename=data_' . $today->format('Ymd_Hi') . '.csv')
+            ->withBody($this->streamFactory->createStreamFromResource($resource));
+
+        throw new PropagateResponseException($response, 200);
     }
 
     /**

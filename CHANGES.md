@@ -1,3 +1,10 @@
+## Version 1.10.0
+- [IMPORTANT] const in Trait does not work in later PHP versions, so we use static string. Therefore we need to change arguments for getFileTCA, getMediaTCA, getImageTCA
+- [FEATURE] Add example downloadAction
+- [FEATURE] Add ArrayPagination
+- [FEATURE] Add example TCA for starttime and endtime
+- [BUGFIX] Dont use TCA definition from hidden, configure itself
+
 ## Version 1.9.0
 - [FEATURE] Example how to load and store data from session
 - [FEATURE] Add recommended Powermail Settings

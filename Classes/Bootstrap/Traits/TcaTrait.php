@@ -19,9 +19,9 @@ namespace Slavlee\CustomPackage\Bootstrap\Traits;
 
 trait TcaTrait
 {
-    public const COMMON_TYPES_FILE = 'common-file-types';
-    public const COMMON_TYPES_IMAGE = 'common-image-types';
-    public const COMMON_TYPES_MEDIA = 'common-media-types';
+    public static string $COMMON_TYPES_FILE = 'common-file-types';
+    public static string $COMMON_TYPES_IMAGE = 'common-image-types';
+    public static string $COMMON_TYPES_MEDIA = 'common-media-types';
 
     /**
      * Name of the current db table
@@ -73,12 +73,73 @@ trait TcaTrait
     }
 
     /**
+     * Get standard date TCA def
+     * @param bool $exclude
+     * @param string $label
+     * @param mixed $size
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getStartTimeTCADef(bool $exclude, string $label = '', $size = 30, array $additionalConfig = []): array
+    {
+        $default = $this->getDateTCADef(
+            $exclude,
+            $label != '' ? $label : 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
+            $size
+        );
+
+        $default['config']['default'] = 0;
+        $default['l10n_display'] = 'defaultAsReadonly';
+        $default['l10n_mode'] = 'exclude';
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Get standard date TCA def
+     * @param bool $exclude
+     * @param string $label
+     * @param mixed $size
+     * @param array $additionalConfig
+     * @return array
+     */
+    protected function getEndTimeTCADef(bool $exclude, string $label = '', $size = 30, array $additionalConfig = []): array
+    {
+        $default = $this->getStartTimeTCADef(
+            $exclude,
+            $label != '' ? $label : 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
+            $size
+        );
+
+        $default['config']['range']['upper'] = \mktime(0, 0, 0, 1, 1, 2106);
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
      * Return the TYPO3 Standard TCA definition for hidden field
      * @return array
      */
     protected function getHiddenTCADef(): array
     {
-        return $GLOBALS['TCA']['tt_content']['columns']['hidden'];
+        $default = $this->getCheckTCADef(
+            true,
+            'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.enabled',
+            false
+        );
+
+        $default['config']['default'] = 0;
+        $default['config']['items'][0]['invertStateDisplay'] = 1;
+
+        return $default;
     }
 
     /**
@@ -215,7 +276,10 @@ trait TcaTrait
      */
     protected function getMediaTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, array $additionalConfig = []): array
     {
-        $tca = $this->getFileTCADef($exclude, $label, $minItems, $maxItems, self::COMMON_TYPES_MEDIA, $additionalConfig);
+        if (!array_key_exists('config', $additionalConfig) || !array_key_exists('allowed', $additionalConfig['config'])) {
+            $additionalConfig['config']['allowed'] = self::$COMMON_TYPES_MEDIA;
+        }
+        $tca = $this->getFileTCADef($exclude, $label, $minItems, $maxItems, $additionalConfig);
 
         return $tca;
     }
@@ -231,7 +295,10 @@ trait TcaTrait
      */
     protected function getImageTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, array $additionalConfig = []): array
     {
-        $tca = $this->getFileTCADef($exclude, $label, $minItems, $maxItems, self::COMMON_TYPES_IMAGE, $additionalConfig);
+        if (!array_key_exists('config', $additionalConfig) || !array_key_exists('allowed', $additionalConfig['config'])) {
+            $additionalConfig['config']['allowed'] = self::$COMMON_TYPES_IMAGE;
+        }
+        $tca = $this->getFileTCADef($exclude, $label, $minItems, $maxItems, $additionalConfig);
 
         return $tca;
     }
@@ -245,7 +312,7 @@ trait TcaTrait
      * @param array $additionalConfig
      * @return array
      */
-    protected function getFileTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, string $allowed = self::COMMON_TYPES_FILE, array $additionalConfig = []): array
+    protected function getFileTCADef(bool $exclude, string $label, int $minItems = 0, int $maxItems = 0, array $additionalConfig = []): array
     {
         $default = [
             'exclude' => $exclude ? 1 : 0,
@@ -254,7 +321,7 @@ trait TcaTrait
                 'type' => 'file',
                 'minitems' => $minItems,
                 'maxitems' => $maxItems,
-                'allowed' => $allowed,
+                'allowed' => self::$COMMON_TYPES_MEDIA,
             ],
         ];
 
