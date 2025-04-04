@@ -1,3 +1,7 @@
+## Version 1.11.0
+- [FEATURE] Add Example TCA for link field
+- [FEATURE] Add Example TCA for category
+
 ## Version 1.10.0
 - [IMPORTANT] const in Trait does not work in later PHP versions, so we use static string. Therefore we need to change arguments for getFileTCA, getMediaTCA, getImageTCA
 - [FEATURE] Add example downloadAction

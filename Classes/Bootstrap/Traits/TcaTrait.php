@@ -22,6 +22,8 @@ trait TcaTrait
     public static string $COMMON_TYPES_FILE = 'common-file-types';
     public static string $COMMON_TYPES_IMAGE = 'common-image-types';
     public static string $COMMON_TYPES_MEDIA = 'common-media-types';
+    public static string $COMMON_TYPES_TEXT = 'common-text-types';
+    public static array $COMMON_TYPES_LINK = ['page', 'url', 'record'];
 
     /**
      * Name of the current db table
@@ -45,7 +47,7 @@ trait TcaTrait
             'config' => [
                 'type' => 'datetime',
                 'size' => $size,
-                'readOnly' => 1
+                'readOnly' => 1,
             ],
         ];
 
@@ -160,7 +162,7 @@ trait TcaTrait
                 'type' => 'input',
                 'size' => $size,
                 'eval' => 'trim',
-                'required' => $required ? 1 : 0
+                'required' => $required ? 1 : 0,
             ],
         ];
 
@@ -185,7 +187,7 @@ trait TcaTrait
             'label' => $label,
             'config' => [
                 'type' => 'email',
-            ]
+            ],
         ];
 
         if (!empty($additionalConfig)) {
@@ -211,7 +213,7 @@ trait TcaTrait
             'config' => [
                 'type' => 'number',
                 'size' => $size,
-                'format' => 'decimal'
+                'format' => 'decimal',
             ]
         ];
 
@@ -382,7 +384,7 @@ trait TcaTrait
                         'label' => '',
                     ],
                 ],
-                'required' => $required ? 1 : 0
+                'required' => $required ? 1 : 0,
             ],
         ];
 
@@ -409,7 +411,7 @@ trait TcaTrait
             'config' => [
                 'type' => 'json',
                 'eval' => 'trim',
-                'required' => $required ? 1 : 0
+                'required' => $required ? 1 : 0,
             ],
         ];
 
@@ -512,6 +514,51 @@ trait TcaTrait
             'config' => [
                 'type' => 'select',
                 'renderType' => $renderType,
+            ],
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Example TCA for link field
+     * @param string $label
+     * @param bool $exclude
+     * @param bool $required
+     * @param array $additionalConfig
+     * @return array|array{config: array{allowedTypes: mixed, type: string, exclude: int, label: string}}
+     */
+    public function getLinkTCADef(string $label, bool $exclude = false, bool $required = false, array $additionalConfig = []): array
+    {
+        $default = [
+            'exclude' => $exclude ? 1 : 0,
+            'label' => $label,
+            'config' => [
+                'type' => 'link',
+                'allowedTypes' => self::$COMMON_TYPES_LINK,
+            ],
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Example TCA Def for category field
+     * @return array|array{config: array{type: string, exclude: int, label: string}}
+     */
+    public function getCategoryTCADef(): array
+    {
+        $default = [
+            'config' => [
+                'type' => 'category',
             ],
         ];
 
