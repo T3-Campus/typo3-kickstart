@@ -59,46 +59,4 @@ final class DownloadController extends ActionController
 
         throw new PropagateResponseException($response, 200);
     }
-
-    /**
-     * Example how to store data in session
-     * @param mixed $data
-     */
-    protected function storeSessionData(string $id, $data): void
-    {
-        $frontendUser = $this->request->getAttribute('frontend.user');
-        $frontendUser->setKey('ses', $id, $data);
-        $frontendUser->storeSessionData();
-    }
-
-    /**
-     * Get data from session
-     * @param string $id
-     * @return mixed
-     */
-    protected function getSessionData(string $id)
-    {
-        return $this->request->getAttribute('frontend.user')->getKey('ses', $id);
-    }
-
-    /**
-     * Checks if session data is present
-     * @param string $id
-     * @return bool
-     */
-    protected function hasSessionData(string $id): bool
-    {
-        return $this->request->getAttribute('frontend.user')->getKey('ses', $id) ? true : false;
-    }
-
-    /**
-     * Remove data in session
-     * @param string $id
-     */
-    protected function removeSessionData(string $id): void
-    {
-        $frontendUser = $this->request->getAttribute('frontend.user');
-        $frontendUser->setKey('ses', $id, null);
-        $frontendUser->storeSessionData();
-    }
 }

@@ -568,4 +568,46 @@ trait TcaTrait
 
         return $default;
     }
+
+    /**
+     * Return example TCA def for IRRE / inline
+     * @param string $label
+     * @param string $foreignTable
+     * @param string $foreignField
+     * @param string $foreignTableField
+     * @param bool $exclude
+     * @param array $additionalConfig
+     * @return array
+     */
+    public function getInlineTCADef(
+            string $label,
+            string $foreignTable,
+            string $foreignField,
+            string $foreignTableField,
+            bool $exclude,
+            array $additionalConfig
+    ): array
+    {
+        $default = [
+            'exclude' => $exclude ? 1 : 0,
+            'label' => $label,
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => $foreignField,
+                'foreign_field' => $foreignField,
+                'foreign_table_field' => $foreignTableField,
+                'appearance' => [
+                    'showSynchronizationLink' => true,
+                    'showAllLocalizationLink' => true,
+                    'showPossibleLocalizationRecords' => true,
+                ]
+            ],
+        ];
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
 }

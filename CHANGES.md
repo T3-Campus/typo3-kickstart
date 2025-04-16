@@ -1,3 +1,7 @@
+## Version 1.12.0
+- [FEATURE] Add example TCA for inline
+- [CHANGE] Move Frontend Session functions into own Utility
+
 ## Version 1.11.0
 - [FEATURE] Add Example TCA for link field
 - [FEATURE] Add Example TCA for category
