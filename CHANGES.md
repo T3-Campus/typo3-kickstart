@@ -1,3 +1,6 @@
+## Version 1.13.0
+- [FEATURE] Add TcaUtility->removeFieldFromCTypeShowItem
+
 ## Version 1.12.0
 - [FEATURE] Add example TCA for inline
 - [CHANGE] Move Frontend Session functions into own Utility
