@@ -24,6 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 trait ExtensionTrait
 {
     protected $extensionKey = 'custom_package';
+    protected static $extensionKeyAsStatic = 'custom_package';
 
     /**
      * Return the extension key in Namespace writing
@@ -99,7 +100,7 @@ trait ExtensionTrait
      * @param string $pluginSignature
      * @param string $fileName
      */
-    protected function registerFlexform(string $pluginSignature, string $fileName)
+    protected function registerFlexform(string $pluginSignature, string $fileName): void
     {
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 
@@ -114,7 +115,7 @@ trait ExtensionTrait
      * @param string $cType
      * @param string $fileName
      */
-    protected function registerFlexformToCType(string $cType, string $fileName)
+    protected function registerFlexformToCType(string $cType, string $fileName): void
     {
         ExtensionManagementUtility::addPiFlexFormValue(
             '*',
@@ -127,7 +128,7 @@ trait ExtensionTrait
      * Set $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature]
      * @param string $value
      */
-    protected function setSubtypesExcludelist(string $pluginSignature, string $value)
+    protected function setSubtypesExcludelist(string $pluginSignature, string $value): void
     {
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = $value;
     }
@@ -146,7 +147,7 @@ trait ExtensionTrait
      * @param string $key
      * @param string $yamlFilename
      */
-    protected function registerRTEPreset(string $key, string $yamlFilename)
+    protected function registerRTEPreset(string $key, string $yamlFilename): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets'][$key] = $this->getConfigPath() . 'RTE/' . $yamlFilename;
     }

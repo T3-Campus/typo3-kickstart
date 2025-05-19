@@ -26,5 +26,5 @@ abstract class Base
     /**
      * Does the main class purpose
      */
-    abstract public function invoke();
+    abstract public function invoke(): void;
 }

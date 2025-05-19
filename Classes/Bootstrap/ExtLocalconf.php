@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the TYPO3 extension: deutscher_staedtetag_package.
+ * This file is part of the TYPO3 extension: custom_package.
  *
  * It is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License, either version 2
@@ -28,7 +28,7 @@ class ExtLocalconf extends Base
     /**
      * Does the main class purpose
      */
-    public function invoke()
+    public function invoke(): void
     {
         $this->registerRTEPresets();
         $this->configurePlugins();
@@ -37,7 +37,7 @@ class ExtLocalconf extends Base
     /**
      * Register new RTE presets
      */
-    private function registerRTEPresets()
+    private function registerRTEPresets(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets'][$this->extensionKey]
             = 'EXT:' . $this->extensionKey . '/Configuration/RTE/Default.yaml';
@@ -46,7 +46,7 @@ class ExtLocalconf extends Base
     /**
      * ExtensionUtility::configurePlugin
      */
-    private function configurePlugins()
+    private function configurePlugins(): void
     {
         ExtensionUtility::configurePlugin(
             $this->getExtensionKeyAsNamespace(),

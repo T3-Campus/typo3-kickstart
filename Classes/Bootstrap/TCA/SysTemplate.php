@@ -28,7 +28,7 @@ class SysTemplate extends Base
     /**
      * Does the main class purpose
      */
-    public function invoke()
+    public function invoke(): void
     {
         $this->addStaticFiles();
     }
@@ -36,7 +36,7 @@ class SysTemplate extends Base
     /**
      * ExtensionManagementUtility::addStaticFile
      */
-    private function addStaticFiles()
+    private function addStaticFiles(): void
     {
         ExtensionManagementUtility::addStaticFile(
             $this->extensionKey,

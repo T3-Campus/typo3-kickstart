@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the TYPO3 extension: bulletin_board.
+ * This file is part of the TYPO3 extension: custom_package.
  *
  * It is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License, either version 2
@@ -153,7 +153,7 @@ trait TcaTrait
      * @param array $additionalConfig
      * @return array
      */
-    protected function getInputTCADef(bool $exclude, string $label, $size = 30, bool $required = true, array $additionalConfig = []): array
+    protected function getInputTCADef(bool $exclude, string $label, $size = 30, bool $required = false, array $additionalConfig = []): array
     {
         $default =  [
             'exclude' => $exclude ? 1 : 0,
@@ -232,7 +232,7 @@ trait TcaTrait
      * @param array $additionalConfig
      * @return array
      */
-    protected function getTextareaCADef(bool $exclude, string $label, bool $required = true, array $additionalConfig = []): array
+    protected function getTextareaCADef(bool $exclude, string $label, bool $required = false, array $additionalConfig = []): array
     {
         $default = $this->getRTETCADef($exclude, $label, $required, $additionalConfig);
         unset($default['config']['enableRichtext']);
@@ -248,7 +248,7 @@ trait TcaTrait
      * @param array $additionalConfig
      * @return array
      */
-    protected function getRTETCADef(bool $exclude, string $label, bool $required = true, array $additionalConfig = []): array
+    protected function getRTETCADef(bool $exclude, string $label, bool $required = false, array $additionalConfig = []): array
     {
         $default = [
             'exclude' => $exclude ? 1 : 0,
@@ -443,6 +443,34 @@ trait TcaTrait
     }
 
     /**
+     * Get l10n_parent TCA Def
+     * @param string $foreignTable
+     * @return array
+     */
+    protected function getL10nParentTCADef(string $label, string $foreignTable): array
+    {
+        return $this->getSelectTCADef(
+            $label,
+            'selectSingle',
+            false,
+            false,
+            [
+                'displayCond' => 'FIELD:sys_language_uid:>:0',
+                'config' => [
+                    'default' => 0,
+                    'items' => [
+                        ['label' => '', 'value' => 0],
+                    ],
+                    'foreign_table' => $foreignTable,
+                    'foreign_table_where' => 'AND ' . $foreignTable . '.pid=###CURRENT_PID### AND ' . $foreignTable . '.sys_language_uid IN (-1,0)',
+                    'maxitems' => 1,
+                    'relationship' => 'manyToOne'
+                ]
+            ]
+        );
+    }
+
+    /**
      * Get l10n_diffsource TCA def
      * @param array $additionalConfig
      * @return array
@@ -506,7 +534,7 @@ trait TcaTrait
      * @param array $additionalConfig
      * @return array
      */
-    public function getSelectTCADef(string $label, string $renderType = 'selectSingle', bool $exclude = false, bool $required = true, array $additionalConfig = []): array
+    public function getSelectTCADef(string $label, string $renderType = 'selectSingle', bool $exclude = false, bool $required = false, array $additionalConfig = []): array
     {
         $default = [
             'exclude' => $exclude ? 1 : 0,
@@ -593,14 +621,56 @@ trait TcaTrait
             'label' => $label,
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => $foreignField,
+                'foreign_table' => $foreignTable,
                 'foreign_field' => $foreignField,
-                'foreign_table_field' => $foreignTableField,
                 'appearance' => [
                     'showSynchronizationLink' => true,
                     'showAllLocalizationLink' => true,
                     'showPossibleLocalizationRecords' => true,
                 ]
+            ],
+        ];
+
+        if (!empty($foreignTableField)) {
+            $default['config']['foreign_table_field'] = $foreignTableField;
+        }
+
+        if (!empty($additionalConfig)) {
+            $default = \array_replace_recursive($default, $additionalConfig);
+        }
+
+        return $default;
+    }
+
+    /**
+     * Return example TCA def for a group
+     * @param string $label
+     * @param string $foreignTable
+     * @param string $foreignField
+     * @param string $foreignTableField
+     * @param bool $exclude
+     * @param array $additionalConfig
+     * @return array
+     */
+    public function getGroupTCADef(
+            string $label,
+            string $allowed,
+            string $relationship = 'manyToOne',
+            int $minitems = 0,
+            int $size = 1,
+            bool $exclude = false,
+            array $additionalConfig = []
+    ): array
+    {
+        $default = [
+            'exclude' => $exclude ? 1 : 0,
+            'label' => $label,
+            'config' => [
+                'type' => 'group',
+                'allowed' => $allowed,
+                'relationship' => $relationship,
+                'minitems' => $minitems,
+                'size' => $size,
             ],
         ];
 

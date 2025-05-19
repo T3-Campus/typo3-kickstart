@@ -1,3 +1,6 @@
+## Version 1.14.0
+- [CHANGE] TcaTrait: Default value for required should be false
+
 ## Version 1.13.0
 - [FEATURE] Add TcaUtility->removeFieldFromCTypeShowItem
 

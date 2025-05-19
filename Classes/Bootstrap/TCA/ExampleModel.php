@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the TYPO3 extension: bulletin_board.
+ * This file is part of the TYPO3 extension: custom_package.
  *
  * It is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License, either version 2
@@ -26,7 +26,7 @@ class ExampleModel extends Base
     use ExtensionTrait;
     use TcaTrait;
 
-    public function invoke()
+    public function invoke(): void
     {
 
     }
