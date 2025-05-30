@@ -1,3 +1,6 @@
+## Version 1.15.0
+- [FEATURE] addPiFlexFormInConfigTabForCType
+
 ## Version 1.14.0
 - [CHANGE] TcaTrait: Default value for required should be false
 
