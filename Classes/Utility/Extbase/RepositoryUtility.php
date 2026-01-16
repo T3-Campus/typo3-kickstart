@@ -34,7 +34,7 @@ class RepositoryUtility
 
 		foreach($parameters as $placeholder => $value)
 		{
-			$sql = preg_replace('/:' . $placeholder . '/', $value, $sql, 1);
+			$sql = preg_replace('/:' . $placeholder . '/', (string)$value, $sql, 1);
 		}
 
 		var_dump($sql);
