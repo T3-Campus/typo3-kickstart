@@ -1,3 +1,20 @@
+## Version 1.15.0
+- [FEATURE] addPiFlexFormInConfigTabForCType
+
+## Version 1.14.0
+- [CHANGE] TcaTrait: Default value for required should be false
+
+## Version 1.13.0
+- [FEATURE] Add TcaUtility->removeFieldFromCTypeShowItem
+
+## Version 1.12.0
+- [FEATURE] Add example TCA for inline
+- [CHANGE] Move Frontend Session functions into own Utility
+
+## Version 1.11.0
+- [FEATURE] Add Example TCA for link field
+- [FEATURE] Add Example TCA for category
+
 ## Version 1.10.0
 - [IMPORTANT] const in Trait does not work in later PHP versions, so we use static string. Therefore we need to change arguments for getFileTCA, getMediaTCA, getImageTCA
 - [FEATURE] Add example downloadAction

@@ -1,13 +1,13 @@
 config {
-    compressCSS = 1
+    compressCss = 1
     compressJs = 1
     concatenateCss = 1
     concatenateJs = 1
 }
 
-[applicationContext == "Development"]
+[applicationContext matches "/^Development/"]
     config {
-        compressCSS = 0
+        compressCss = 0
         compressJs = 0
         concatenateCss = 0
         concatenateJs = 0

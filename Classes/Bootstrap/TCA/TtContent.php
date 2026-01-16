@@ -25,7 +25,7 @@ class TtContent extends Base
     /**
      * Does the main class purpose
      */
-    public function invoke()
+    public function invoke(): void
     {
         $this->registerPlugins();
     }
@@ -33,7 +33,7 @@ class TtContent extends Base
     /**
      * ExtensionUtility::registerPlugin
      */
-    private function registerPlugins()
+    private function registerPlugins(): void
     {
         $pluginSignature = ExtensionUtility::registerPlugin(
             $this->getExtensionKeyAsNamespace(),
@@ -41,7 +41,7 @@ class TtContent extends Base
             $this->getLLL('locallang_plugins.xlf:upload.title'),
         );
 
-        $this->registerFlexform($pluginSignature, 'Upload.xml');        
+        $this->registerFlexform($pluginSignature, 'Upload.xml');
 
         ExtensionUtility::registerPlugin(
             $this->getExtensionKeyAsNamespace(),

@@ -18,12 +18,13 @@ declare(strict_types=1);
 namespace Slavlee\CustomPackage\Bootstrap\Traits;
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 trait ExtensionTrait
 {
     protected $extensionKey = 'custom_package';
+    protected static $extensionKeyAsStatic = 'custom_package';
 
     /**
      * Return the extension key in Namespace writing
@@ -98,9 +99,8 @@ trait ExtensionTrait
      * Register a flexform
      * @param string $pluginSignature
      * @param string $fileName
-     * @return void
      */
-    protected function registerFlexform(string $pluginSignature, string $fileName)
+    protected function registerFlexform(string $pluginSignature, string $fileName): void
     {
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 
@@ -114,9 +114,8 @@ trait ExtensionTrait
      * Register a flexform to a CType
      * @param string $cType
      * @param string $fileName
-     * @return void
      */
-    protected function registerFlexformToCType(string $cType, string $fileName)
+    protected function registerFlexformToCType(string $cType, string $fileName): void
     {
         ExtensionManagementUtility::addPiFlexFormValue(
             '*',
@@ -126,11 +125,24 @@ trait ExtensionTrait
     }
 
     /**
+     * Add pi_flexform in own Configuration Tab
+     * @param string $cType
+     */
+    protected function addPiFlexFormInConfigTabForCType(string $cType): void
+    {
+        ExtensionManagementUtility::addToAllTCAtypes(
+            'tt_content',
+            '--div--;Configuration,pi_flexform,',
+            $cType,
+            'after:subheader',
+        );
+    }
+
+    /**
      * Set $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature]
      * @param string $value
-     * @return void
      */
-    protected function setSubtypesExcludelist(string $pluginSignature, string $value)
+    protected function setSubtypesExcludelist(string $pluginSignature, string $value): void
     {
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = $value;
     }
@@ -149,7 +161,7 @@ trait ExtensionTrait
      * @param string $key
      * @param string $yamlFilename
      */
-    protected function registerRTEPreset(string $key, string $yamlFilename)
+    protected function registerRTEPreset(string $key, string $yamlFilename): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets'][$key] = $this->getConfigPath() . 'RTE/' . $yamlFilename;
     }
@@ -176,5 +188,16 @@ trait ExtensionTrait
 
         return GeneralUtility::makeInstance(ExtensionConfiguration::class)
                 ->get($this->extensionKey);
+    }
+
+    /**
+     * Configure fluid email paths
+     */
+    protected function configureFluidMailTemplatePaths(): void
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['templateRootPaths'][]
+            = 'EXT:' . $this->extensionKey . '/Resources/Private/Templates/Email/';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['layoutRootPaths'][]
+            = 'EXT:' . $this->extensionKey . '/Resources/Private/Layouts/Email/';
     }
 }
