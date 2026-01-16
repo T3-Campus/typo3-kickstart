@@ -1,0 +1,23 @@
+categories:
+  CustomPackage:
+    label: 'Blog Example' # (1)
+  CustomPackage.templates:
+    label: 'Templates' # (2)
+    parent: CustomPackage
+  CustomPackage.pages:
+    label: 'Pages'
+    parent: CustomPackage
+
+settings:
+  CustomPackage.templates.templateRootPath:  # (5)
+    label: 'Templates' # (3)
+    category: CustomPackage.templates # (2)
+    description: 'Path to template root'  # (4)
+    type: string  # (6)
+    default: 'EXT:blog_example/Resources/Private/Templates/'  # (7) + (8)
+  CustomPackage.templates.partialRootPath:
+    label: 'Partials'
+    category: CustomPackage.templates
+    description: 'Path to partial root'
+    type: string
+    default: 'EXT:blog_example/Resources/Private/Partials/'

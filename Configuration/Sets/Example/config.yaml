@@ -1,0 +1,8 @@
+name: slavlee/custompackage-base
+label: My Set
+dependencies:
+  - typo3/fluid-styled-content
+  - typo3/felogin
+  - typo3/form
+  - typo3/redirects
+  - typo3/seo-sitemap

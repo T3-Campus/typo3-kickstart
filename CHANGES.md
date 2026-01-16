@@ -1,3 +1,6 @@
+## Version 1.16.0
+- [FEATURE] Add example site set
+
 ## Version 1.15.0
 - [FEATURE] addPiFlexFormInConfigTabForCType
 
