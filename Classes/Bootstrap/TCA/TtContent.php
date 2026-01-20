@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 namespace Slavlee\CustomPackage\Bootstrap\TCA;
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use Slavlee\CustomPackage\Bootstrap\Base;
 
@@ -28,6 +29,7 @@ class TtContent extends Base
     public function invoke(): void
     {
         $this->registerPlugins();
+        $this->createCustomCType();
     }
 
     /**
@@ -39,6 +41,9 @@ class TtContent extends Base
             $this->getExtensionKeyAsNamespace(),
             'Upload',
             $this->getLLL('locallang_plugins.xlf:upload.title'),
+            'my-icon',
+            'plugins',
+            $this->getLLL('locallang_plugins.xlf:upload.description'),
         );
 
         $this->registerFlexform($pluginSignature, 'Upload.xml');
@@ -47,6 +52,45 @@ class TtContent extends Base
             $this->getExtensionKeyAsNamespace(),
             'Download',
             $this->getLLL('locallang_plugins.xlf:download.title'),
+            'my-icon',
+            'plugins',
+            $this->getLLL('locallang_plugins.xlf:download.description'),
         );
+    }
+
+
+    private function createCustomCType(): void
+    {
+        $customCType = 'custom_content';
+
+        ExtensionManagementUtility::addTcaSelectItem(
+            'tt_content',
+            'CType',
+            [
+                'label' => $this->getLLL('locallang_tca.xlf:custom_content.title'),
+                'value' => $customCType,
+                'group' => 'default',
+            ],
+            'textmedia',
+            'after',
+        );
+
+        // Add new CType to the list of available content elements
+        $GLOBALS['TCA']['tt_content']['types'][$customCType] = [
+            'showitem' => '
+                --div--;General,
+                    header;' . $this->getLLL('locallang_tca.xlf:custom_content.header') . ',
+                    bodytext;' . $this->getLLL('locallang_tca.xlf:custom_content.bodytext') . ',
+                --div--;Appearance,
+                    --palette--;;frame,
+                --div--;Access,
+                    --palette--;;hidden,
+                    --palette--;;access,
+                --div--;Categories,
+                    categories,
+                --div--;Notes,
+                    rowDescription,
+            ',
+        ];
     }
 }

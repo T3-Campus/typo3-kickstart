@@ -1,3 +1,6 @@
+## Version 1.17.0
+- [FEATURE] Add example to create custom ctype
+
 ## Version 1.16.0
 - [FEATURE] Add example site set
 
