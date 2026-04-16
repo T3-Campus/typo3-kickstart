@@ -1,3 +1,7 @@
+## Version 1.18.0
+- [BUGFIX] Remove makeInstanceForDi
+- [FEATURE] Add TypoScript example to temporarily replace non migrated content elements to avoid errors
+
 ## Version 1.17.0
 - [FEATURE] Add example to create custom ctype
 

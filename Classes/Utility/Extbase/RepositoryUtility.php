@@ -28,7 +28,7 @@ class RepositoryUtility
      */
     public static function debugQuery(Query $query)
 	{
-		$queryParser = GeneralUtility::makeInstanceForDi(Typo3DbQueryParser::class);
+		$queryParser = GeneralUtility::makeInstance(Typo3DbQueryParser::class);
 		$parameters = $queryParser->convertQueryToDoctrineQueryBuilder($query)->getParameters();
 		$sql = $queryParser->convertQueryToDoctrineQueryBuilder($query)->getSQL();
 

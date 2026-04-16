@@ -1,0 +1,3 @@
+tt_content.list.20.kmacookies_banner = TEXT
+tt_content.list.20.kmacookies_banner.data = field:list_type
+tt_content.list.20.kmacookies_banner.wrap = <div class="alert alert-danger">@TODO Migrate&nbsp;<strong>|</strong></div>
