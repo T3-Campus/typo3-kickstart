@@ -21,3 +21,9 @@ settings:
     description: 'Path to partial root'
     type: string
     default: 'EXT:blog_example/Resources/Private/Partials/'
+  example.types.int:
+    type: int
+    default: 42
+    category: Example.types
+    label: 'Type int'
+    description: 'Checks whether the value is already an integer or can be interpreted as an integer. If yes, the string is converted into an integer.'
