@@ -1,3 +1,6 @@
+## Version 1.19.0
+- [TASK] Add HMENU Example with Dropdown
+
 ## Version 1.18.0
 - [BUGFIX] Remove makeInstanceForDi
 - [FEATURE] Add TypoScript example to temporarily replace non migrated content elements to avoid errors

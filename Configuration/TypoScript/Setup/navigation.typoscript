@@ -25,27 +25,27 @@ lib.navigation.top {
 
 lib.navigation.main = HMENU
 lib.navigation.main {
-    special = directory
-    special.value = {$lib.navigation.main.nav.special.value}
-    wrap = <ul class="navbar-nav">|</ul>
+  special = directory
+  special.value = {$lib.navigation.main.nav.special.value}
+  wrap = <ul class="navbar-nav">|</ul>
 
-    1 = TMENU
-    1 {
-        NO {
-            ATagBeforeWrap = 1
-            ATagParams = class="nav-link"
-            wrapItemAndSub = <li class="nav-item">|</li>
-        }
-
-        ACT = 1
-        ACT < .NO
-        ACT {
-            ATagParams = class="nav-link active"
-        }
-
-        CUR = 1
-        CUR < .ACT
+  1 = TMENU
+  1 {
+    NO {
+      ATagBeforeWrap = 1
+      ATagParams = class="nav-link"
+      wrapItemAndSub = <li class="nav-item">|</li>
     }
+
+    ACT = 1
+    ACT < .NO
+    ACT {
+      ATagParams = class="nav-link active"
+    }
+
+    CUR = 1
+    CUR < .ACT
+  }
 }
 
 lib.navigation.sub = HMENU
@@ -132,4 +132,90 @@ lib.navigation.languageMenu {
       stdWrap.typolink >
     }
   }
+}
+
+
+# 3 Level Menu example with Bootstrap Dropdown for 2.level
+lib.igasite.pageHeader.mainmenu = HMENU
+lib.igasite.pageHeader.mainmenu {
+    wrap = <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">|</ul>
+
+    1 = TMENU
+    1 {
+      expAll = 1
+
+      NO = 1
+      NO {
+        wrapItemAndSub = <li>|</li>
+        ATagParams = class="px-2 nav-link"
+      }
+
+      CUR < .NO
+      CUR.wrapItemAndSub = <li class="active">|</li>
+
+      ACT < .CUR
+
+      IFSUB < .NO
+      IFSUB {
+        wrapItemAndSub = <li class="nav-item dropdown">|</li>
+        ATagParams = class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+      }
+
+      ACTIFSUB = 1
+      ACTIFSUB < .IFSUB
+      ACTIFSUB {
+        wrapItemAndSub = <li class="active">|</li>
+        ATagParams = class="nav-link dropdown-toggle" aria-current="page" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+      }
+
+      CURIFSUB < .ACTIFSUB
+    }
+
+    2 < .1
+    2 {
+      expAll = 1
+      wrap = <ul class="dropdown-menu">|</ul>
+
+      NO = 1
+      NO {
+        wrapItemAndSub = <li>|</li>
+        ATagParams = class="dropdown-item"
+      }
+
+      ACT = 1
+      ACT < .NO
+      ACT {
+        wrapItemAndSub = <li class="active">|</li>
+        ATagParams = class="dropdown-item" aria-current="page"
+      }
+
+      IFSUB = 1
+      IFSUB < .NO
+
+      ACTIFSUB = 1
+      ACTIFSUB < .ACT
+
+      CURIFSUB < .ACTIFSUB
+    }
+
+    3 = TMENU
+    3 {
+      wrap = <ul class="list-unstyled ps-3 mb-2">|</ul>
+
+      # Standard-Link in der 3. Ebene
+      NO = 1
+      NO {
+          wrapItemAndSub = <li>|</li>
+      }
+
+      # Aktiver Link in der 3. Ebene
+      ACT = 1
+      ACT < .NO
+      ACT {
+        wrapItemAndSub = <li class="active">|</li>
+        ATagParams = aria-current="page"
+      }
+
+      CUR < .ACT
+    }
 }
